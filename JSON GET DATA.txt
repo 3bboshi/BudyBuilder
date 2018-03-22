@@ -1,0 +1,29 @@
+   JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET, mJSONURLString, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("All_users");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject emp = jsonArray.getJSONObject(i);
+
+                        String cust_name = emp.getString("cust_name");
+                        String cust_mobile = emp.getString("cust_mobile");
+                        String remark = emp.getString("remark");
+
+                        listitems.add(new listviewcust(cust_name, cust_mobile, remark));
+                        listAllItem();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley", "Error");
+                //       JSON() ;
+                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+        requestQueue.add(request);

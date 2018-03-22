@@ -1,0 +1,48 @@
+<?php
+
+//$host		= "localhost"; // Use Local Host Only      
+$host		= "localhost";
+$username	= "root";
+$password	= "";
+$db_name	= "osamaphp"; 
+ 
+
+$link = mysqli_connect($host, $username, $password, $db_name);
+
+ 
+  $S_name= $_POST['Ename'];
+ $S_mob= $_POST['Emob'];
+$S_remark= $_POST['EEremark'];
+$S_EKD= $_POST['EKD'];
+$S_Tdate= $_POST['Tdate1'];
+$S_ToDate1= $_POST['ToDate1'];
+$S_invoice= $_POST['Einvoice'];
+$S_imageid= $_POST['EimageId'];
+
+
+
+
+ $Sql_Query = "INSERT INTO Customer(cust_name,cust_mobile,remark,kd,today_date,valid_date,invoice,image_id,imagenew) VALUES ('$S_name','$S_mob','$S_remark','$S_EKD','$S_Tdate','$S_ToDate1','$S_invoice','$S_imageid')";
+
+ if(mysqli_query($link,$Sql_Query))
+{
+	   $response["Success"] = true;
+	 echo json_encode($response); 
+	 
+ echo 'Registered Successfully';
+}
+else
+{
+	 $response["Success"] = false;
+	 echo json_encode($response); 
+ echo 'Something went wrong';
+ }
+ 
+mysqli_close($link);
+
+?>
+
+
+
+
+

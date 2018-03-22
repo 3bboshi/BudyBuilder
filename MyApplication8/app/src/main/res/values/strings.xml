@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BodyBuilder</string>
+
+    My Application
+    <string name="no_internet_connection">No internet connection</string>
+
+
+    <string name="Waite">Waite</string>
+
+</resources>

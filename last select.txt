@@ -1,0 +1,35 @@
+<?php
+
+include("config.php");
+
+
+
+// Create connection
+$conn = new mysqli($host, $username, $password, $db_name);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+ 
+
+$sql = "SELECT cust_name,cust_mobile,remark FROM Customer  " ;
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+   
+	$All_users=array();
+	
+    while($row = $result->fetch_assoc()) {
+      
+		$All_users[]=$row ;
+
+	}
+} else {
+    echo "0 results";
+}
+$json_re=array();
+array_push($json_re,array("users"=> $All_users));
+echo json_encode($json_re);
+$conn->close();
+?>
